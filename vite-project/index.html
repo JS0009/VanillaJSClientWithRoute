@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <base href="."/>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="./src/index.js"></script>
+    <div id="app">
+      <h1>Welcome to my sample page</h1>
+      <hr>
+      <ul class="nav">
+        <li><a href="main">Main</a></li>
+        <li><a href="aboute">Aboute</a></li>
+        <li><a href="downloads">Downloads</a></li>
+      </ul>
+      <hr>
+      <div class="content"></div>
+    </div>
+    <script type="module" src="./src/router/index.js"></script>
   </body>
 </html>

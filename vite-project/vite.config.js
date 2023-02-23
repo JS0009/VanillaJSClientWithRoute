@@ -1,4 +1,21 @@
-// vite.config.js
-export default {
-    // config options
-}
+import { defineConfig } from "vite";
+//import { ViteALiases } from "vite-aliases";
+import legacy from "@vitejs/plugin-legacy";
+
+export default defineConfig({
+    build: {
+        target: 'es2017',
+        outDir: 'build',
+    },
+    server: {
+        port: 3000,
+        host: '0.0.0.0',
+        hmr: true,
+    },
+    plugins: [
+        //ViteALiases(),
+        legacy({
+            targets: ['defaults', 'not IE 11'],
+        })
+    ],
+})
