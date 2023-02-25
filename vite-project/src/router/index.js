@@ -16,6 +16,10 @@ updatestate = (state) => {
     contentEl.innerHTML = links[state.page]
 }
 
+window.addEventListener('popstate', (event) => {
+    updatestate(event.state)
+})
+
 navEl.addEventListener('click', function (e) {
     let state
     if (e.target.tagName !== 'A') return;
