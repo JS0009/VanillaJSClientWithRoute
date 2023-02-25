@@ -1,12 +1,14 @@
-let links, updatestate, contentEl, navEl;
-
-contentEl = document.querySelector('.content');
+import { renderSt } from "../pages/main.template.js"
+let links, updatestate, contentEl, navEl
+contentEl = document.querySelector('.content')
 navEl = document.querySelector('.nav')
+let divApp = document.getElementById("app")
+
 
 links = {
-    main: "This is the <strong>main<strong page/>",
-    aboute: "This is the <strong>aboute<strong page",
-    downloads: "This is the <strong>downloads<strong/> page"
+    main: renderSt,
+    aboute: "This is the <strong>aboute<strong/>page",
+    downloads: "This is the <strong>downloads<strong/>page",
 }
 
 updatestate = (state) => {
