@@ -21,10 +21,7 @@ updatestate = (state) => {
 window.addEventListener('popstate', (event) => {
     updatestate(event.state)
 })
-window.addEventListener('load', () => {
-    let state = { page: '/' }
-    updatestate(state)
-})
+window.addEventListener('load', updatestate(history.state))
 navEl.addEventListener('click', function (event) {
     let state
     if (event.target.tagName !== 'A') return
