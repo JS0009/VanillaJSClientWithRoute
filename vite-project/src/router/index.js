@@ -1,32 +1,38 @@
-import { renderSt } from "../pages/main.template.js"
-let links, updatestate, contentEl, navEl
+import { renderMain } from "../pages/main.template.js"
+
+let route, updatestate, contentEl, navEl
+
 contentEl = document.querySelector('.content')
 navEl = document.querySelector('.nav')
-let divApp = document.getElementById("app")
 
 
-links = {
-    main: renderSt,
+route = {
+    '/': '<h1>Welcome</h1>',
+    main: renderMain,
     aboute: "This is the <strong>aboute<strong/>page",
     downloads: "This is the <strong>downloads<strong/>page",
 }
 
 updatestate = (state) => {
     if (!state) return
-    contentEl.innerHTML = links[state.page]
+    contentEl.innerHTML = route[state.page]
 }
 
 window.addEventListener('popstate', (event) => {
     updatestate(event.state)
 })
-
-navEl.addEventListener('click', function (e) {
+window.addEventListener('load', () => {
+    let state = { page: '/' }
+    updatestate(state)
+})
+navEl.addEventListener('click', function (event) {
     let state
-    if (e.target.tagName !== 'A') return;
+    if (event.target.tagName !== 'A') return
     state = {
-        page: e.target.getAttribute('href')
+        page: event.target.getAttribute('href')
     }
+    console.log(state.page)
     history.pushState(state, '', state.page)
     updatestate(state)
-    e.preventDefault()
+    event.preventDefault()
 })
