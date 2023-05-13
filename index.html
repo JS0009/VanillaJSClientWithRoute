@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="style.css"> 
+  <title>Simple Router</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/"  data-link>Home</a></li>
+        <li><a href="/about"  data-link>About</a></li>
+        <li><a href="/contact"  data-link>Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div id="app">
+      <!-- These sections will be replaced based on the current URL -->
+    </div>
+  </main>
+  <script src="router.js"></script><!-- Link to your router JavaScript file -->
+</body>
+
+</html>
