@@ -1,13 +1,14 @@
 import { pages } from './pages.js';
 
 const routes = [
-    { path: '/home', view: async () => loadPage() },
-    { path: '/about', view: async () => loadPage() },
-    { path: '/contact', view: async () => loadPage() },
+    { path: '/home' },
+    { path: '/about' },
+    { path: '/contact' },
 ];
 
 async function loadPage() {
-    const page = pages.find((p) => p.name === location.pathname.split('/')[1]);
+    const page = await pages.find((p) => p.name === location.pathname.split('/')[1]);
+    console.log(page)
     if (page) {
         const newPage = document.createElement('div');
         newPage.innerHTML = page.content;
@@ -28,7 +29,7 @@ async function loadPage() {
     }
 }
 
-export async function initRouter() {
+async function initRouter() {
     let potentialMatches = routes.map(route => {
         return {
             route: route,
@@ -38,6 +39,8 @@ export async function initRouter() {
 
     let match = potentialMatches.find((potentialMatch) => potentialMatch.isMatch);
 
+    //console.log(match);
+
     if (!match) {
         match = {
             route: routes[0],
@@ -45,7 +48,6 @@ export async function initRouter() {
         };
     }
 
-    return match.route.view();
 }
 
 export function router() {

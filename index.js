@@ -9,6 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
             router();
         }
     });
-    navigateTo('/home');
+    navigateTo('http://localhost:5173/home');
     router();
 });
