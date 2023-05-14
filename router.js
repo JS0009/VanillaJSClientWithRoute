@@ -1,41 +1,41 @@
+import { pages } from './pages.js';
 
-const pages = [
-    {
-        name: 'home',
-        title: 'Welcome Home!',
-        content: '<p>Click the buttons above to navigate.</p>',
-    },
-    {
-        name: 'about',
-        title: 'About Us',
-        content: '<p>We are a team of developers.</p>',
-    },
-    {
-        name: 'contact',
-        title: 'Contact Us',
-        content: '<address>123 Main St<br>Anytown, USA 12345</address>',
-    },
+const routes = [
+    { path: '/home', view: async () => loadPage() },
+    { path: '/about', view: async () => loadPage() },
+    { path: '/contact', view: async () => loadPage() },
 ];
 
-const navigateTo = (url) => {
-    history.pushState(null, null, url);
-    router();
+async function loadPage() {
+    const page = pages.find((p) => p.name === location.pathname.split('/')[1]);
+    if (page) {
+        const newPage = document.createElement('div');
+        newPage.innerHTML = page.content;
 
-};
+        const titleElement = document.createElement('h1');
+        titleElement.textContent = page.title;
 
-const router = async () => {
-    const routes = [
-        { path: '/home', view: loadPage },
-        { path: '/about', view: loadPage },
-        { path: '/contact', view: loadPage },
-    ];
+        document.title = page.title;
 
-    const potentialMatches = routes.map((route) => {
+        const mainContent = document.getElementById('app');
+        while (mainContent.firstChild) {
+            mainContent.removeChild(mainContent.firstChild);
+        }
+        mainContent.appendChild(titleElement);
+        mainContent.appendChild(newPage);
+    } else {
+        console.log(`Page "${location.pathname}" not found.`);
+    }
+}
+
+export async function initRouter() {
+    let potentialMatches = routes.map(route => {
         return {
             route: route,
             isMatch: location.pathname === route.path,
         };
     });
+
     let match = potentialMatches.find((potentialMatch) => potentialMatch.isMatch);
 
     if (!match) {
@@ -45,40 +45,11 @@ const router = async () => {
         };
     }
 
-    const view = await match.route.view(match.route);
+    return match.route.view();
+}
 
-    function loadPage(route) {
-        const page = pages.find((p) => p.name === route.path.split('/')[1]);
-        if (page) {
-            console.log(page)
-            const newPage = document.createElement('div');
-            newPage.innerHTML = page.content;
-
-            const titleElement = document.createElement('h1');
-            titleElement.textContent = page.title;
-
-            document.title = page.title;
-
-            const mainContent = document.getElementById('app');
-            while (mainContent.firstChild) {
-                mainContent.removeChild(mainContent.firstChild);
-            }
-            mainContent.appendChild(titleElement);
-            mainContent.appendChild(newPage);
-        } else {
-            console.log(`Page "${route.path}" not found.`);
-        }
-    }
-};
+export function router() {
+    initRouter().then(() => loadPage());
+}
 
 window.addEventListener('popstate', router);
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.body.addEventListener('click', (event) => {
-        if (event.target.matches('[data-link]')) {
-            event.preventDefault();
-            navigateTo(event.target.href);
-        }
-    });
-    router();
-});
