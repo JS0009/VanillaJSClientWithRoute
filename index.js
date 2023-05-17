@@ -1,4 +1,4 @@
-import HistoryRouter from "./router";
+import HistoryRouter from "./routes/router";
 
 const router = new HistoryRouter();
 
