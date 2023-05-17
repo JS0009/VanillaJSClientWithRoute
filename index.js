@@ -1,14 +1,49 @@
-import { navigateTo } from './navigation.js';
-import { router } from './router.js';
+class HistoryRouter {
+    constructor() {
+        this.routes = {};
+        this.currentUrl = '';
+    }
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.body.addEventListener('click', (event) => {
-        if (event.target.matches('[data-link]')) {
-            event.preventDefault();
-            navigateTo(event.target.href);
-            router();
+    route(path, callback) {
+        this.routes[path] = callback;
+    }
+
+    updateView() {
+        const url = location.pathname;
+        if (this.currentUrl === url) {
+            return;
         }
-    });
-    navigateTo('http://localhost:5173/home');
-    router();
-});
+
+        if (!this.routes[url]) {
+            console.error(`No route defined for ${url}`);
+            return;
+        }
+
+        document.querySelector('div').innerHTML = this.routes[url]();
+        this.currentUrl = url;
+    }
+
+    init() {
+        window.addEventListener('popstate', this.updateView.bind(this));
+
+        const links = document.querySelectorAll('nav a');
+        links.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const path = link.getAttribute('href');
+                history.pushState(null, null, path);
+                this.updateView();
+            });
+        });
+
+        this.updateView();
+    }
+}
+
+const router = new HistoryRouter();
+
+router.route('/home', () => `<h1>Welcome to the homepage</h1>`);
+router.route('/about', () => `<h1>About us</h1><p>We're a small company...</p>`);
+router.route('/contact', () => `<h1>Contact us</h1><form><input type="text" placeholder="Name"/><input type="email" placeholder="Email"/><textarea placeholder="Message"></textarea><button type="submit">Send</button></form>`);
+
+router.init();
