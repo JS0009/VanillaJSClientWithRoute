@@ -2,10 +2,12 @@ export default class HistoryRouter {
     constructor() {
         this.routes = {};
         this.currentUrl = '';
+        console.log(this.routes)
     }
 
     route(path, callback) {
         this.routes[path] = callback;
+
     }
 
     updateView() {
