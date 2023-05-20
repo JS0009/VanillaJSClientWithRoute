@@ -12,7 +12,7 @@ import "./index.css"
 const router = new HistoryRouter();
 const data = pages[0]
 console.log(data)
-router.route('/', () => lentaPage(data.id, data.name, data.price, data.description, data.category, data.brand, data.rating, data.image));
+router.route('/', () => lentaPage(...Object.values(data)));
 router.route('/basket', () => basketPage());
 router.route('/profile', () => profilePages());
 router.route('/delivery', () => deliveryPages());
