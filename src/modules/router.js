@@ -1,3 +1,5 @@
+import { preparationRender } from "./utils";
+
 export default class HistoryRouter {
     constructor() {
         this.routes = {};
@@ -21,8 +23,8 @@ export default class HistoryRouter {
             return;
         }
 
-        document.querySelector('div').innerHTML = this.routes[url]();
-        this.currentUrl = url;
+        preparationRender(location.pathname, this.routes, url)
+
     }
 
     init() {

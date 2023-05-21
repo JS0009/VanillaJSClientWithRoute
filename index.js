@@ -10,9 +10,9 @@ import "./index.css"
 
 
 const router = new HistoryRouter();
-const data = pages[0]
-console.log(data)
-router.route('/', () => lentaPage(...Object.values(data)));
+for (const data of pages) {
+    router.route('/', () => lentaPage(...Object.values(data)));
+}
 router.route('/basket', () => basketPage());
 router.route('/profile', () => profilePages());
 router.route('/delivery', () => deliveryPages());
