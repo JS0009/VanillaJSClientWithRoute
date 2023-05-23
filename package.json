@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "redux": "^4.2.1",
-    "scrollerjs": "^1.0.4"
+    "scrollbooster": "^3.0.2"
   }
 }

@@ -1,4 +1,4 @@
-export default function basketPage() {
+export function basketPage() {
     return (`<h1>Корзина</h1>`)
 }
 
