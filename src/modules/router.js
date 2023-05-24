@@ -1,5 +1,6 @@
+import RenderPageClass from "../components/renders/renderPage";
 
-export default class РistoryRenderRouter {
+export class HistoryRenderRouter {
     constructor() {
         this.routes = '';
         this.routeURL = '';
@@ -7,29 +8,14 @@ export default class РistoryRenderRouter {
 
     route(path, callback) {
         this.routes = callback;
-        this.routeURL = path;
+
 
 
     }
     render() {
-        const containerApp = document.getElementById('app');
-        const scrollContainer = document.createElement('div');
-        scrollContainer.innerHTML = this.routes;
-        containerApp.appendChild(scrollContainer);
+        new RenderPageClass(this.routes, this.routeURL).renders();
     }
 
-    init() {
-        const links = document.querySelectorAll('nav a');
-        links.forEach((link) => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-                const path = link.getAttribute('href');
-                history.pushState(null, null, path);
-                viewUpdate()
-            });
-        });
-
-    }
 }
 
 

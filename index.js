@@ -1,4 +1,4 @@
-import HistoryRenderRouter from "./src/modules/router";
+import { HistoryRenderRouter } from "./src/modules/router";
 import { lentaPage } from "./src/components/pages/lentaPageComponent"
 import { pages } from "./src/components/database";
 import { basketPage } from "./src/components/pages/basketPage";
@@ -15,6 +15,7 @@ export function viewUpdate() {
         for (const data of pages) {
             router.route('/', lentaPage(data));
             router.render()
+
         }
     } else if (window.location.pathname === '/basket') {
         router.route('/basket', () => basketPage());
@@ -24,7 +25,7 @@ export function viewUpdate() {
         router.route('/delivery', () => deliveryPage());
     } else if (window.location.pathname === '/address') {
         router.route('/address', () => addressPage());
-    } else { router.route(window.location.pathname, () => '<h1>Маршурут отсутствует</h1>') } // в случаее, если нет совпадения 
+    } else { router.route('<h1>Маршурут отсутствует</h1>') } // в случаее, если нет совпадения 
 }
 
 const links = document.querySelectorAll('nav a');
@@ -38,7 +39,6 @@ links.forEach((link) => {
 });
 
 window.addEventListener('popstate', viewUpdate)
-
 window.onload = () => {
     viewUpdate()
 }
