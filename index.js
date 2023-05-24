@@ -18,13 +18,13 @@ export function viewUpdate() {
 
         }
     } else if (window.location.pathname === '/basket') {
-        router.route('/basket', () => basketPage());
+        router.route('/basket', basketPage());
     } else if (window.location.pathname === '/profile') {
-        router.route('/profile', () => profilePage());
+        router.route('/profile', profilePage());
     } else if (window.location.pathname === '/delivery') {
-        router.route('/delivery', () => deliveryPage());
+        router.route('/delivery', deliveryPage());
     } else if (window.location.pathname === '/address') {
-        router.route('/address', () => addressPage());
+        router.route('/address', addressPage());
     } else { router.route('<h1>Маршурут отсутствует</h1>') } // в случаее, если нет совпадения 
 }
 
