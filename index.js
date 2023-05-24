@@ -1,4 +1,4 @@
-import HistoryRouter from "./src/modules/router";
+import HistoryRenderRouter from "./src/modules/router";
 import { lentaPage } from "./src/components/pages/lentaPageComponent"
 import { pages } from "./src/components/database";
 import { basketPage } from "./src/components/pages/basketPage";
@@ -7,17 +7,15 @@ import { deliveryPage } from "./src/components/pages/deliveryPage";
 import { addressPage } from "./src/components/pages/addressPage";
 import "./index.css"
 import "./src/styles/nav.css"
-import RenderLentaPageClass from "./src/components/renders/renderLentaPage";
 
-const router = new HistoryRouter();
-const renderPage = new RenderLentaPageClass()
-
+const router = new HistoryRenderRouter();
 
 export function viewUpdate() {
     if (window.location.pathname === '/') {
         for (const data of pages) {
-            router.route('/', () => lentaPage(data));
-        } renderPage.render()
+            router.route('/', lentaPage(data));
+            router.render()
+        }
     } else if (window.location.pathname === '/basket') {
         router.route('/basket', () => basketPage());
     } else if (window.location.pathname === '/profile') {
