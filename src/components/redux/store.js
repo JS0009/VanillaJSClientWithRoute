@@ -1,20 +1,53 @@
-// Импортируем функцию configureStore из библиотеки reduxjs/toolkit
-import { configureStore } from '@reduxjs/toolkit'// Импортируем функцию appReducer из файла reducers
-import appReducer from './reducers';
-// Импортируем массив страниц, который нужно сохранить в Redux
-import { pages } from '../database';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import fetch from 'node-fetch';
 
-// Определение начального состояния приложения, используя импортированный массив
 const initialState = {
-    products: pages
+    products: [],
+    error: null
 };
 
-// Создание нового хранилища, передавая функцию appReducer и начальное состояние
-const store = configureStore({
-    reducer: {
-        myReducer: appReducer
+export function* fetchProducts() {
+    try {
+        const response = yield call(fetch, 'https://jsonplaceholder.typicode.com/posts');
+        const json = yield call([response, 'json']);
+        yield put({ type: 'FETCH_PRODUCTS_SUCCESS', products: json });
+    } catch (error) {
+        yield put({ type: 'FETCH_PRODUCTS_ERROR', error });
+        console.error(error);
     }
-});
+}
 
-// Экспортирование хранилища для использования в других частях приложения
-export default store;
+function* rootSaga() {
+    yield takeLatest('FETCH_PRODUCTS', fetchProducts);
+}
+
+const sagaMiddleware = createSagaMiddleware();
+
+function reducer(state = initialState, action) {
+    switch (action.type) {
+        case 'FETCH_PRODUCTS_SUCCESS':
+            return {
+                ...state,
+                products: action.products
+            };
+        case 'FETCH_PRODUCTS_ERROR':
+            return {
+                ...state,
+                error: action.error
+            };
+        default:
+            return state;
+    }
+}
+
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(rootSaga);
+
+store.dispatch({ type: 'FETCH_PRODUCTS' });
+
+store.subscribe(() => {
+    console.log('Current state:', store.getState());
+});
