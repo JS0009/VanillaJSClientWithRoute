@@ -9,7 +9,7 @@ export class HistoryRenderRouter {
     route(path, callback) {
         this.routes = callback;
         this.routeURL = path;
-
+        console.log(this.routes)
 
     }
     render() {
