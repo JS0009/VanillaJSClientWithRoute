@@ -1,11 +1,10 @@
 import { HistoryRenderRouter } from "./src/modules/router";
 import { lentaPage } from "./src/components/pages/lentaPageComponent"
 import { pages } from "./src/components/database";
-import { basketPage } from "./src/components/pages/basketPage";
+import Basket from "./src/components/pages/basket";
 import { notFound } from "./src/components/pages/notFound";
-import { profilePage } from "./src/components/pages/profilePage";
-import { deliveryPage } from "./src/components/pages/deliveryPage";
-import { addressPage } from "./src/components/pages/addressPage";
+import Profil from "./src/components/pages/profile";
+import Delivery from "./src/components/pages/delivery";
 import Address from "./src/components/pages/address";
 import "./index.css"
 import "./src/styles/nav.css"
@@ -22,16 +21,18 @@ export function viewUpdate() {
             }
             return
         case '/basket':
-            router.route('/basket', basketPage());
+            const pageBasket = new Basket(pathname)
+            pageBasket.render()
             return
         case '/profile':
-            router.route('/profile', profilePage());
+            const profilePage = new Profil(pathname);
+            profilePage.render()
             return
         case '/delivery':
-            router.route('/delivery', deliveryPage());
+            const pageDelivery = new Delivery(pathname)
+            pageDelivery.render()
             return
         case '/address':
-            //router.route('/address', addressPage());
             const page = new Address(pathname)
             page.render()
             return
@@ -40,21 +41,7 @@ export function viewUpdate() {
             return
 
     }
-    /*if (window.location.pathname === '/') {
-        for (const data of pages) {
-            router.route('/', lentaPage(data));
-            router.render()
 
-        }
-    } else if (window.location.pathname === '/basket') {
-        router.route('/basket', basketPage());
-    } else if (window.location.pathname === '/profile') {
-        router.route('/profile', profilePage());
-    } else if (window.location.pathname === '/delivery') {
-        router.route('/delivery', deliveryPage());
-    } else if (window.location.pathname === '/address') {
-        router.route('/address', addressPage());
-    } else { router.route('<h1>Маршурут отсутствует</h1>') } // в случаее, если нет совпадения */
 }
 
 const links = document.querySelectorAll('nav a');
