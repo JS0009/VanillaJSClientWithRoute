@@ -1,4 +1,12 @@
-export function lentaPage(data) {
+const template = `
+<ul>
+<li> 123 </li>
+<li> 123 </li>
+<li> 123 </li>
+</ul>
+`
+export default function lentaPage(data) {
+    if (true) return template
     const productDiv = document.createElement("div");
     productDiv.classList.add("product");
     productDiv.id = data.id;
