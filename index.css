@@ -6,7 +6,7 @@ body {
 
 }
 
-.my-container-class {
+.card {
     display: inline-block;
 }
 
@@ -17,8 +17,8 @@ body {
     /* сохраняет соотношение сторон  */
 }
 
-.my-container-class p {
-display: block;
+.card-text {
+    display: block;
     height: auto;
     width: fit-content;
     margin: 0;
