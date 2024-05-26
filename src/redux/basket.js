@@ -4,17 +4,24 @@ const initialState = {
     arr: []
 };
 
-const slice = createSlice({
+let i = 0; //Почему-то внутри addProduct не сработал?
+
+export const slice = createSlice({
     name: 'basket',
     initialState,
     reducers: {
         addProduct: (state, action) => {
             state.arr.push(action.payload); // Add the new element to the array
-            console.log(state.arr)
+            while (i < state.arr.length) {
+                console.log(state.arr[i]);
+                i++;
+            }
+            //console.log(state.arr)
         }
     }
 });
 
-export const { addProduct } = slice.actions;
+
+const { addProduct } = slice.actions;
 export default slice.reducer;
 

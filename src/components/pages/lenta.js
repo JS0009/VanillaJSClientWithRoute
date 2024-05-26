@@ -1,7 +1,7 @@
 import Page from "./page";
 import { pages } from "../database";
 import store from "../../redux/store";
-//import { addProduct } from "../../redux/basket";
+import { slice } from "../../redux/basket";
 
 export default class Lenta extends Page {
     constructor(pathname) {
@@ -22,7 +22,7 @@ export default class Lenta extends Page {
             addToBasket.setAttribute('data-id', id);
             addToBasket.addEventListener('click', function () {
                 const { id } = this.dataset;
-                store.dispatch(basketSlice.actions.addProduct(id));
+                store.dispatch(slice.actions.addProduct(id));
 
             }) //Деструкция []{}?
             this.parent.appendChild(card); // добавляем новый элемент в конец списка дочерних элементов родительского элемента
