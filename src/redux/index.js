@@ -25,7 +25,7 @@ decrementButton.addEventListener('click', () => {
     store.dispatch(counterSlice.actions.decrement());
 });
 
-store.subscribe(() => {
-    const state = store.getState();
-    counterElement.textContent = state;
-});
+// store.subscribe(() => {
+//     const state = store.getState();
+//     counterElement.textContent = state;
+//});

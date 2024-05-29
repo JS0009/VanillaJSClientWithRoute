@@ -22,7 +22,7 @@ export default class Lenta extends Page {
             addToBasket.setAttribute('data-id', id);
             addToBasket.addEventListener('click', function () {
                 const { id } = this.dataset;
-                store.dispatch(slice.actions.addProduct(id));
+                store.dispatch(slice.actions.addProduct({ id, amount: 1 }));
 
             }) //Деструкция []{}?
             this.parent.appendChild(card); // добавляем новый элемент в конец списка дочерних элементов родительского элемента
