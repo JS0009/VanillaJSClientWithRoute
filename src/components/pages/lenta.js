@@ -1,7 +1,5 @@
 import Page from "./page";
 import { pages } from "../database";
-import store from "../../redux/store";
-import { slice } from "../../redux/basket";
 
 export default class Lenta extends Page {
     constructor(pathname) {
