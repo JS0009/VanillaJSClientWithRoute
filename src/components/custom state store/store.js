@@ -17,7 +17,7 @@ export function createStore(reducer, initialState) {
 
         // Метод для подписки на изменения состояния
         subscribe(fn) {
-            listeners.push(fn);        // Добавляем функцию-слушатель в массив
+            listeners.push(fn);   // Добавляем функцию-слушатель в массив
         }
     };
 }

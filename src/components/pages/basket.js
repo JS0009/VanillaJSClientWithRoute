@@ -7,7 +7,7 @@ export default class Basket extends Page {
     }
 
     render() {
-        this.parent.innerHTML = html
+        this.parent.innerHTML = "Basket"
 
     }
 }
