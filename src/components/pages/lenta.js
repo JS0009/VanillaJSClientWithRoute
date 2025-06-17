@@ -1,10 +1,11 @@
-import Page from "./page";
 import { pages } from "../database";
+import { History } from "../router/history"
 
-export default class Lenta extends Page {
+export default class Lenta extends History {
     constructor(pathname) {
         super(pathname)
     }
+
     render() {
         //pages.forEach(card => {
         pages.forEach(({ id, name, description, category, price, brand, rating }) => {

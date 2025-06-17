@@ -1,6 +1,6 @@
-import Page from "./page";
+import { History } from "../router/history"
 
-export default class Profil extends Page {
+export default class Profil extends History {
     constructor(pathname) {
         super(pathname)
     }

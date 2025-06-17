@@ -1,4 +1,4 @@
-export default class Page {
+export class History {
     constructor(pathname) {
         this.pathname = pathname
         this.parent = document.getElementById('app')
@@ -6,7 +6,4 @@ export default class Page {
         history.pushState(null, null, this.pathname)
     }
 
-    render() {
-        throw 'это абстрактный метод'
-    }
 }

@@ -6,7 +6,6 @@ import Address from "../pages/address"
 import { notFound } from "../pages/notFound"
 
 
-
 export function viewUpdate() {
     const { pathname } = window.location
     switch (pathname) {
@@ -35,6 +34,8 @@ export function viewUpdate() {
             return
     }
 }
+
+
 
 export function navigation() {
     const links = document.querySelectorAll('nav a');
